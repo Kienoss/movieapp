@@ -4,12 +4,13 @@ import { bindActionCreators, compose } from "redux";
 import { connect } from "react-redux";
 import * as actionMovie from "../state/actions/actionMovie";
 import { useHorizontalScroll } from './HorizontalScroll';
+import '@fontsource/roboto/400.css';
 
 const POSTER_ROOT_URL = `https://image.tmdb.org/t/p/original`;
 const TrendingMovieListContainer = styled.div`
     display: flex;
     gap: 5px;
-    overflow-x: hidden;
+    overflow-x: scroll;
 `
 const TrendingMovieContainer = styled.div`
     display: grid;
