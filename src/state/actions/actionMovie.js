@@ -17,7 +17,30 @@ export function getTrendingMovieList(){
             })
         }).catch((error) => {
             dispatch({
-                type: "GET_ERROR_TRENDING_MOVIE",
+                type: "GET_ERROR_MOVIE",
+                error,
+            })
+        })
+    }
+}
+
+export function getUpcomingMovieList(){
+    return function(dispatch){
+        return axios({
+            baseURL: `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}`,
+            method: "get",
+            params: {
+                language: "en-US",
+                page: "1",
+            }
+        }).then((upcomingMovieList) => {
+            dispatch({
+                type: "GET_UPCOMING_MOVIE_LIST",
+                upcomingMovieList,
+            })
+        }).catch((error) => {
+            dispatch({
+                type: "GET_ERROR_MOVIE",
                 error,
             })
         })
