@@ -152,8 +152,6 @@ function MovieListDisplay(props){
                     <button onClick={() => handleChunkIndexIncrease("trending")}>Right</button>
                 </MovieListContainer>
             </div>
-            <div><Link to={`search/movie/avengers`}><button>TEST</button></Link></div>
-
         </div>
     )
 }

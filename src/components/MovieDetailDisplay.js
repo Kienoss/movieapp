@@ -4,7 +4,7 @@ import { bindActionCreators, compose } from "redux";
 import { connect } from "react-redux";
 import * as actionMovie from "../state/actions/actionMovie";
 import '@fontsource/roboto/400.css';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
 
 const POSTER_ROOT_URL = `https://image.tmdb.org/t/p/original`;
@@ -23,6 +23,7 @@ const FlexContainer = styled.div`
 function MovieDetailDisplay (props) {
     const [imageSource, setImageSource] = useState("")
     let { movieid, mediatype } = useParams();
+    const navigate = useNavigate();
     useEffect(() => {
         props._getMovieDetail(movieid, mediatype);
     }, []);
@@ -49,9 +50,7 @@ function MovieDetailDisplay (props) {
     return (
         <div>
             <div>
-                <Link to={"/"}>
-                    <button>Back</button>
-                </Link>
+                <button onClick={()=>navigate(-1)}>Back</button>
             </div>
             <FlexContainer>
                 <PosterImage src={POSTER_ROOT_URL + props.movieDetail.data.poster_path} alt={"poster"}/>
