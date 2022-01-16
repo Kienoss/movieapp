@@ -20,7 +20,9 @@ const MovieContainer = styled.div`
 `
 const PosterImage = styled.img`
     max-height: 200px;
-    max-width: 200px;
+    max-width: 133.32px;
+    min-height: 200px;
+    min-width: 133.32px;
 `
 const Centered = styled.div`
     display: grid;

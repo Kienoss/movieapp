@@ -20,7 +20,9 @@ const MovieContainer = styled.div`
 `
 const PosterImage = styled.img`
     max-height: 200px;
-    max-width: 200px;
+    max-width: 133.32px;
+    min-height: 200px;
+    min-width: 133.32px;
 `
 const Centered = styled.div`
     display: grid;
@@ -34,7 +36,7 @@ function MovieSearchedListDisplay (props) {
 
     useEffect(() => {
         props._getSearchedMovieList(inputmoviename, pageNumber);
-    }, [pageNumber]);
+    }, [pageNumber, inputmoviename]);
     
     if(!props.searchedMovieList){
         return(
@@ -83,6 +85,15 @@ function MovieSearchedListDisplay (props) {
         }         
     }
     const mapSearchedMovieList = searchedMovieListChunks[searchedMovieChunkIndex].map((searchedMovie, index) => {
+        if(searchedMovie.poster_path == null){
+            return (
+                <Link to={`/movie/${searchedMovie.id}`} key={index}>
+                    <MovieContainer>
+                        <PosterImage src={"https://st3.depositphotos.com/23594922/31822/v/600/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg"} alt={"poster"}/>
+                    </MovieContainer>
+                </Link>
+            )
+        }
         return(
             <Link to={`/movie/${searchedMovie.id}`} key={index}>
                 <MovieContainer>

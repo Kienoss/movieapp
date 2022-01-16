@@ -21,6 +21,7 @@ const FlexContainer = styled.div`
 `
 
 function MovieDetailDisplay (props) {
+    const [imageSource, setImageSource] = useState("")
     let { movieid, mediatype } = useParams();
     useEffect(() => {
         props._getMovieDetail(movieid, mediatype);
@@ -39,7 +40,12 @@ function MovieDetailDisplay (props) {
             </span>
         )
     })
-
+    // if(props.movieDetail.data.poster_path == null){
+    //     setImageSource("https://st3.depositphotos.com/23594922/31822/v/600/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg")
+    // }
+    // if(props.movieDetail.data.poster_path){
+    //     setImageSource(POSTER_ROOT_URL + props.movieDetail.data.poster_path);
+    // }
     return (
         <div>
             <div>
