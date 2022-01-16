@@ -1,4 +1,5 @@
-import * as React from 'react';
+import *  as React from 'react';
+import { useRef } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -9,6 +10,8 @@ import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import '@fontsource/roboto/400.css';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const Search = styled('div')(({ theme }) => ({
   	position: 'relative',
@@ -52,40 +55,57 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   	},
 }));
 
+
+
 export default function SearchAppBar() {
-  return (
-	<Box sx={{ flexGrow: 1 }}>
-	  	<AppBar position="static">
-			<Toolbar>
-				<IconButton
-					size="large"
-					edge="start"
-					color="inherit"
-					aria-label="open drawer"
-					sx={{ mr: 2 }}
-				>
-					<MenuIcon />
-				</IconButton>
-				<Typography
-				variant="h6"
-				noWrap
-				component="div"
-				sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-				>
-					MOVIE
-				</Typography>
-				<Search>
-					<SearchIconWrapper>
-						<SearchIcon />
-					</SearchIconWrapper>
-					<StyledInputBase
-						placeholder="Search…"
-						inputProps={{ 'aria-label': 'search' }}
-					/>
-				</Search>
-			</Toolbar>
-	  	</AppBar>
-	</Box>
-  );
+
+	const searchMovieInput = useRef();
+	const navigate = useNavigate()
+
+	const handleKeyDown = (e) => {
+		if(e.key !== 'Enter') return
+		if(e.key === 'Enter') {
+			console.log(searchMovieInput.current.value)
+			navigate(`search/movie/${searchMovieInput.current.value}`);
+			// return(
+			// 	<Redirect to={`search/movie/${searchMovieInput.current.value}`}/>
+			// )
+		}
+	}
+  	return (
+		<Box sx={{ flexGrow: 1 }}>
+			<AppBar position="static">
+				<Toolbar>
+					<IconButton
+						size="large"
+						edge="start"
+						color="inherit"
+						aria-label="open drawer"
+						sx={{ mr: 2 }}
+					>
+						<MenuIcon />
+					</IconButton>
+					<Typography
+					variant="h6"
+					noWrap
+					component="div"
+					sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+					>
+						MOVIE
+					</Typography>
+					<Search>
+						<SearchIconWrapper>
+							<SearchIcon />
+						</SearchIconWrapper>
+						<StyledInputBase
+							placeholder="Search…"
+							inputProps={{ 'aria-label': 'search', ref: searchMovieInput }}
+							onKeyDown={handleKeyDown}
+						/>
+					</Search>
+				</Toolbar>
+			</AppBar>
+		</Box>
+  	);
 }
 
