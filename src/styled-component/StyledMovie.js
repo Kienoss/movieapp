@@ -17,6 +17,7 @@ export const StyledChevronRight = styled(ChevronRight)`
 export const MovieListTitle = styled.div`
 	font-size: 24px;
 	margin-bottom: 16px;
+	font-weight: 400;
 `
 
 

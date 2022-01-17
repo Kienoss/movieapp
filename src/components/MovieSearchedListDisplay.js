@@ -5,6 +5,7 @@ import * as actionMovie from "../state/actions/actionMovie";
 import '@fontsource/roboto/400.css';
 import { Link, useParams } from 'react-router-dom';
 import { BulletContainer, ChevronButton, MovieContainer, MovieListContainer, MovieListTitle, PaginationProgressBullet, PaginationProgressContainer, PosterImage, StyledChevronLeft, StyledChevronRight } from '../styled-component/StyledMovie';
+import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 
 
 const POSTER_ROOT_URL = `https://image.tmdb.org/t/p/original`;
@@ -13,17 +14,20 @@ function MovieSearchedListDisplay (props) {
 	const [searchedMovieChunkIndex, setSearchedMovieChunkIndex] = useState(0);
 	const [pageNumber, setPageNumber] = useState(1);
 	let { inputmoviename, mediatype } = useParams();
-	console.log(inputmoviename, mediatype)
 	useEffect(() => {
 		props._getSearchedMovieList(inputmoviename, pageNumber);
 	}, [pageNumber, inputmoviename]);
-	
+	useEffect(()=>{
+		setPageNumber(1);
+	}, [inputmoviename])
+	useEffect(()=>{
+		setSearchedMovieChunkIndex(0);
+	}, [pageNumber])
 	if(!props.searchedMovieList){
 		return(
 			<div>Loading...</div>
 		)
 	}
-	console.log(props.searchedMovieList)
 	const sliceMovieListIntoChunks = (listType) => {
 		let movieList = [];
 		let chunkMaxLength = 9;
@@ -117,6 +121,22 @@ function MovieSearchedListDisplay (props) {
 		return paginationProgressArray;
 	}
 
+	const handlePageNumberDecrease = () => {
+		if(pageNumber <= 1){
+			setPageNumber(props.searchedMovieList.total_pages);
+			return;
+		}
+		setPageNumber(pageNumber - 1)
+	}
+
+	const handlePageNumberIncrease = () => {
+		if(pageNumber === props.searchedMovieList.total_pages){
+			setPageNumber(1);
+			return;
+		}
+		setPageNumber(pageNumber + 1);
+	}
+
 	return (
 		<div>
 			<MovieListTitle>
@@ -125,7 +145,16 @@ function MovieSearchedListDisplay (props) {
 			{renderSearchedMovieListChunk()}
 			<PaginationProgressContainer>
 				{renderPaginationProgress(searchedMovieListChunks, searchedMovieChunkIndex, setSearchedMovieChunkIndex)}  
-			</PaginationProgressContainer> 
+			</PaginationProgressContainer>
+			<div style={{
+				display: 'flex',
+				flexDirection: 'row',
+				justifyContent: 'center',
+			}}>
+				<ChevronLeft style={{cursor: 'pointer'}} onClick={() => handlePageNumberDecrease()}/>
+				{pageNumber}
+				<ChevronRight style={{cursor: 'pointer'}} onClick={() => handlePageNumberIncrease()}/>	
+			</div> 
 		</div>
 	)
 }

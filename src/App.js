@@ -28,12 +28,12 @@ function App(){
 			<AppBarContainer>
 				<AppBar/>
 			</AppBarContainer>
-				<AppContainer>
-					<Routes>
-						<Route path={"/"} exact element={<MovieListDisplay/>}/>
-						<Route path={"search/:mediatype/:inputmoviename"} element={<MovieSearchedListDisplay/>}/>
-						<Route path={"/:mediatype/:movieid"} element={<MovieDetailDisplay/>}/>
-					</Routes>
+			<AppContainer>
+				<Routes>
+					<Route path={"/"} exact element={<MovieListDisplay/>}/>
+					<Route path={"/:mediatype/:movieid"} element={<MovieDetailDisplay/>}/>
+					<Route path={"search/:mediatype/:inputmoviename"} element={<MovieSearchedListDisplay/>}/>
+				</Routes>
 			</AppContainer>
 		</BrowserRouter>
 	)
