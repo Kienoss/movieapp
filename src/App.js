@@ -6,7 +6,11 @@ import AppBar from './components/AppBar';
 import styled from 'styled-components';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-const AppContainer = styled.div`	
+
+const AppContainer = styled.div`
+	display: grid;
+	place-items: center;
+	margin-top: 30px;	
 `
 
 const StyledDiv = styled.div`	
@@ -21,15 +25,15 @@ const AppBarContainer = styled.div`
 function App(){
 	return(
 		<BrowserRouter>
-			<AppContainer>
-				<AppBarContainer>
-					<AppBar/>
-				</AppBarContainer>
-			<Routes>
-				<Route path={"/"} exact element={<MovieListDisplay/>}/>
-				<Route path={"/:mediatype/:movieid"} element={<MovieDetailDisplay/>}/>
-				<Route path={"search/:mediatype/:inputmoviename"} element={<MovieSearchedListDisplay/>}/>
-			</Routes>
+			<AppBarContainer>
+				<AppBar/>
+			</AppBarContainer>
+				<AppContainer>
+					<Routes>
+						<Route path={"/"} exact element={<MovieListDisplay/>}/>
+						<Route path={"search/:mediatype/:inputmoviename"} element={<MovieSearchedListDisplay/>}/>
+						<Route path={"/:mediatype/:movieid"} element={<MovieDetailDisplay/>}/>
+					</Routes>
 			</AppContainer>
 		</BrowserRouter>
 	)

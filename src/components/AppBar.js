@@ -1,6 +1,6 @@
 import *  as React from 'react';
 import { useRef } from 'react';
-import { styled, alpha } from '@mui/material/styles';
+import { styled as styledMUI, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,9 +11,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import '@fontsource/roboto/400.css';
 import { Link, useNavigate } from 'react-router-dom';
+import styled from 'styled-components'
 
 
-const Search = styled('div')(({ theme }) => ({
+const Search = styledMUI('div')(({ theme }) => ({
   	position: 'relative',
   	borderRadius: theme.shape.borderRadius,
   	backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -28,7 +29,7 @@ const Search = styled('div')(({ theme }) => ({
   	},
 }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
+const SearchIconWrapper = styledMUI('div')(({ theme }) => ({
 	padding: theme.spacing(0, 2),
   	height: '100%',
   	position: 'absolute',
@@ -38,7 +39,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   	justifyContent: 'center',
 }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
+const StyledInputBase = styledMUI(InputBase)(({ theme }) => ({
   	color: 'inherit',
 	'& .MuiInputBase-input': {
 		padding: theme.spacing(1, 1, 1, 0),
@@ -55,6 +56,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   	},
 }));
 
+const ThemeAppBar = styled(AppBar)`
+	background-color: ${(props) => props.theme.highlight3};
+`
+
 
 
 export default function SearchAppBar() {
@@ -67,14 +72,11 @@ export default function SearchAppBar() {
 		if(e.key === 'Enter') {
 			console.log(searchMovieInput.current.value)
 			navigate(`search/movie/${searchMovieInput.current.value}`);
-			// return(
-			// 	<Redirect to={`search/movie/${searchMovieInput.current.value}`}/>
-			// )
 		}
 	}
   	return (
 		<Box sx={{ flexGrow: 1 }}>
-			<AppBar position="static">
+			<ThemeAppBar position="static">
 				<Toolbar>
 					<IconButton
 						size="large"
@@ -86,12 +88,14 @@ export default function SearchAppBar() {
 						<MenuIcon />
 					</IconButton>
 					<Typography
-					variant="h6"
-					noWrap
-					component="div"
-					sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+						variant="h6"
+						noWrap
+						component="div"
+						sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
 					>
-						MOVIE
+						<Link to={"/"}>
+							MOVIE
+						</Link>
 					</Typography>
 					<Search>
 						<SearchIconWrapper>
@@ -104,7 +108,7 @@ export default function SearchAppBar() {
 						/>
 					</Search>
 				</Toolbar>
-			</AppBar>
+			</ThemeAppBar>
 		</Box>
   	);
 }
