@@ -152,7 +152,7 @@ function MovieSearchedListDisplay (props) {
 				justifyContent: 'center',
 			}}>
 				<ChevronLeft style={{cursor: 'pointer'}} onClick={() => handlePageNumberDecrease()}/>
-				{pageNumber}
+				{pageNumber + " / " + props.searchedMovieList.total_pages}
 				<ChevronRight style={{cursor: 'pointer'}} onClick={() => handlePageNumberIncrease()}/>	
 			</div> 
 		</div>

@@ -58,6 +58,7 @@ const StyledInputBase = styledMUI(InputBase)(({ theme }) => ({
 
 const ThemeAppBar = styled(AppBar)`
 	background-color: ${(props) => props.theme.highlight3};
+	opacity: 0.9;
 `
 
 

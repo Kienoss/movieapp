@@ -55,7 +55,7 @@ function MovieListDisplay(props){
 
 	const upcomingMovieListChunks = sliceMovieListIntoChunks("upcoming");
 	const trendingMovieListChunks = sliceMovieListIntoChunks("trending");
-
+	//------------------------------
 	const handleChunkIndexIncrease = (listType) => {
 		let movieListChunks = [];
 		if(listType === "upcoming"){
@@ -90,6 +90,7 @@ function MovieListDisplay(props){
 			setTrendingMovieChunkIndex(trendingMovieChunkIndex-1); 
 		}       
 	}
+	//------------------------------
 	console.log(props)
 	const mapUpcomingMovieList = upcomingMovieListChunks[upcomingMovieChunkIndex].map((upcomingMovie, index) => {
 		return(
@@ -110,7 +111,7 @@ function MovieListDisplay(props){
 			</Link>
 		);
 	})
-
+	//------------------------------
 	const renderPaginationProgress = (movieListChunks, currentChunkIndex, setChunkIndex) => {
 		if(!movieListChunks){
 			return null;

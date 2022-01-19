@@ -20,7 +20,7 @@ const PosterImage = styled.img`
 const FlexContainer = styled.div`
 	display: flex;
 	justify-content: center;
-	gap: 10px;
+	gap: 100px;
 `
 
 const GenreContainer = styled.div`
@@ -44,9 +44,16 @@ const MovieInfoContainer = styled.div`
 
 const MovieOverviewHeader = styled.div`
 	font-weight: 400;
-	font-size: 20px;
+	font-size: 30px;
 	margin-bottom: 10px;
-	margin-top: 10px;
+	margin-top: 40px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+`
+
+const MovieOverviewContainer = styled.div`
+	
 `
 
 function MovieDetailDisplay (props) {
@@ -100,12 +107,12 @@ function MovieDetailDisplay (props) {
 					</div>
 				</MovieInfoContainer> 
 			</FlexContainer>
-			<div>
+			<MovieOverviewContainer>
 				<MovieOverviewHeader>
 					Overview
 				</MovieOverviewHeader>
 				{props.movieDetail.overview}
-			</div>
+			</MovieOverviewContainer>
 		</div>
 	)
 }
